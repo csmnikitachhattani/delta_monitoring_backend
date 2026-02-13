@@ -39,7 +39,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       // Department info
       .input("Dept_Id", sql.NVarChar(50), deptId)
       .input("Department_Name", sql.NVarChar(255), departmentName)
-      .input("Entry_Date", sql.Date, '2026-02-09')
+      .input("Entry_Date", sql.Date, entryDate)
 
       // Counts
       .input("Press_Releases", sql.Int, pressReleases || 0)

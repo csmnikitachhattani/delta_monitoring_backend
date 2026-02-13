@@ -6,7 +6,7 @@ const config = {
   server: '103.79.34.50', // 👈 THIS WAS UNDEFINED
   database: 'Delta_Monitoring',
   options: {
-    port: 1433,
+    //port: 1433,
     encrypt: false,
     trustServerCertificate: true
   }
