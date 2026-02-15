@@ -8,11 +8,13 @@ const UpdateDetail = require("../controllers/departmentDailyEntryUpdate.controll
 
 const {
   getDepartmentDailyEntry,
+  getDailyEntries,
 } = require("../controllers/entryListController");
 
 router.post("/userLogin", authController.userLogin);
 
 router.get("/department-daily-entry", getDepartmentDailyEntry);
+router.get("/get-entries", getDailyEntries);
 
 router.get(
     "/departments/:proCode",

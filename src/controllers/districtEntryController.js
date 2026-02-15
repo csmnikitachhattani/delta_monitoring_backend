@@ -17,6 +17,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       atrActionTaken,
       instagramPosts,
       editResponseLink,
+      user_id
     } = req.body;
 
     // 🔒 Basic validation
@@ -26,6 +27,12 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     //     message: "Dept Id, Department Name and Entry Date are required",
     //   });
     // }
+    if (!user_id) {
+      return res.status(400).json({
+        success: false,
+        message: "user_id are required",
+      });
+    }
 
     const pool = await poolPromise;
 
@@ -59,6 +66,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       .input("ATR_Articles_Shared", sql.Int, atrArticlesShared || 0)
       .input("ATR_Action_Taken", sql.Int, atrActionTaken || 0)
       .input("Instagram_Posts", sql.Int, instagramPosts || 0)
+      .input("user_id", sql.NVarChar(255), user_id)
 
       // Meta
       .input(
