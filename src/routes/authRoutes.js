@@ -5,16 +5,17 @@ const departmentController = require("../controllers/dailyEntry");
 const controller = require("../controllers/districtEntryController");
 const GetDetail = require("../controllers/departmentDailyEntry.controller");
 const UpdateDetail = require("../controllers/departmentDailyEntryUpdate.controller");
-
 const {
   getDepartmentDailyEntry,
   getDailyEntries,
 } = require("../controllers/entryListController");
+const {insertDistrictDailyEntry} = require('../controllers/districtController')
 
 router.post("/userLogin", authController.userLogin);
 
 router.get("/department-daily-entry", getDepartmentDailyEntry);
 router.get("/get-entries", getDailyEntries);
+router.post("/district-entry", insertDistrictDailyEntry);
 
 router.get(
     "/departments/:proCode",
