@@ -5,21 +5,19 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     const {
       Email_Address,
       District_name,
-      Date,
-      Press_Releases = 0,
-      Success_Stories = 0,
-      Stories_Published_Nationally = 0,
-      Stories_Published_on_State_Front_Page = 0,
-      Facebook_Posts = 0,
-      Twitter_X_Posts = 0,
-      ATR___Articles_Shared = 0,
-      ATR___Action_Taken = 0,
-      Instagram_Posts = 0,
+      entryDate,
+      pressRelease,
+      successStories,
+      nationalStories,
+      stateFundPost,
+      facebookPosts,
+      twitterPosts,
+      instagramPosts,
       Edit_Response_Link = null,
       District_id,
       user_id,
     } = req.body;
-
+    console.log(req.body)
     // Basic validation
     if ( !District_name || !user_id) {
       return res.status(400).json({
@@ -31,18 +29,16 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     const pool = await poolPromise;
 
     await pool.request()
-      .input("Email_Address", sql.NVarChar(255), Email_Address)
-      .input("District_name", sql.NVarChar(150), District_name)
-      .input("Date", sql.Date, Date)
-      .input("Press_Releases", sql.Int, Press_Releases)
-      .input("Success_Stories", sql.Int, Success_Stories)
-      .input("Stories_Published_Nationally", sql.Int, Stories_Published_Nationally)
-      .input("Stories_Published_on_State_Front_Page", sql.Int, Stories_Published_on_State_Front_Page)
-      .input("Facebook_Posts", sql.Int, Facebook_Posts)
-      .input("Twitter_X_Posts", sql.Int, Twitter_X_Posts)
-      .input("ATR___Articles_Shared", sql.Int, ATR___Articles_Shared)
-      .input("ATR___Action_Taken", sql.Int, ATR___Action_Taken)
-      .input("Instagram_Posts", sql.Int, Instagram_Posts)
+    .input("Email_Address", sql.NVarChar(255), Email_Address)     
+     .input("District_name", sql.NVarChar(150), District_name)
+      .input("Date", sql.Date, entryDate)
+      .input("Press_Releases", sql.Int, pressRelease)
+      .input("Success_Stories", sql.Int, successStories)
+      .input("Stories_Published_Nationally", sql.Int, nationalStories)
+      .input("Stories_Published_on_State_Front_Page", sql.Int, stateFundPost)
+      .input("Facebook_Posts", sql.Int, facebookPosts)
+      .input("Twitter_X_Posts", sql.Int, twitterPosts)
+      .input("Instagram_Posts", sql.Int, instagramPosts)
       .input("Edit_Response_Link", sql.NVarChar(500), Edit_Response_Link)
       .input("District_id", sql.Int, District_id)
       .input("user_id", sql.NVarChar(50), user_id)
