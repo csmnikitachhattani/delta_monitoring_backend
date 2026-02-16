@@ -84,8 +84,7 @@ exports.getDistrictEntryById = async (req, res) => {
       console.error("DB Error:", err);
       res.status(500).json({ error: "Internal server error" });
     }
-  };
-
+};
 
 exports.updateDistrictEntry = async (req, res) => {
   const { entry_id } = req.params;
@@ -111,19 +110,18 @@ exports.updateDistrictEntry = async (req, res) => {
     request.input("Email_Address", sql.NVarChar(255), data.Email_Address ?? null);
     request.input("District_name", sql.NVarChar(255), data.District_name ?? null);
     request.input("Date", sql.Date, data.Date ?? null);
-
-    request.input("Press_Releases", sql.Int, data.Press_Releases ?? null);
-    request.input("Success_Stories", sql.Int, data.Success_Stories ?? null);
-    request.input("Stories_Published_Nationally", sql.Int, data.Stories_Published_Nationally ?? null);
-    request.input("Stories_Published_on_State_Front_Page", sql.Int, data.Stories_Published_on_State_Front_Page ?? null);
-    request.input("Facebook_Posts", sql.Int, data.Facebook_Posts ?? null);
-    request.input("Twitter_X_Posts", sql.Int, data.Twitter_X_Posts ?? null);
+    request.input("Press_Releases", sql.Int, data.pressRelease ?? null);
+    request.input("Success_Stories", sql.Int, data.successStories ?? null);
+    request.input("Stories_Published_Nationally", sql.Int, data.nationalStories ?? null);
+    request.input("Stories_Published_on_State_Front_Page", sql.Int, data.stateFrontPost ?? null);
+    request.input("Facebook_Posts", sql.Int, data.facebookPosts ?? null);
+    request.input("Twitter_X_Posts", sql.Int, data.twitterPosts  ?? null);
     request.input("ATR___Articles_Shared", sql.Int, data.ATR___Articles_Shared ?? null);
     request.input("ATR___Action_Taken", sql.Int, data.ATR___Action_Taken ?? null);
-    request.input("Instagram_Posts", sql.Int, data.Instagram_Posts ?? null);
+    request.input("Instagram_Posts", sql.Int, data.instagramPosts ?? null);
 
     request.input("Edit_Response_Link", sql.NVarChar(sql.MAX), data.Edit_Response_Link ?? null);
-    request.input("District_id", sql.Int, data.District_id ?? null);
+    request.input("District_id", sql.Int, data.District_code ?? null);
     request.input("User_id", sql.Int, data.User_id ?? null);
 
     // ✅ Execute SP
