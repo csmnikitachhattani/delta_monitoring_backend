@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/authController");
-const departmentController = require("../controllers/dailyEntry");
-const controller = require("../controllers/districtEntryController");
+const departmentController = require("../controllers/getDepartment");
+const controller = require("../controllers/departmentEntryController");
 const GetDetail = require("../controllers/departmentDailyEntry.controller");
 const UpdateDetail = require("../controllers/departmentDailyEntryUpdate.controller");
 const {
