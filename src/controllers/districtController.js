@@ -31,7 +31,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
 
     await pool.request()
     .input("Email_Address", sql.NVarChar(255), Email_Address)     
-     .input("District_name", sql.NVarChar(150), District_name)
+     //.input("District_name", sql.NVarChar(150), District_name)
       .input("Date", sql.Date, entryDate)
       .input("Press_Releases", sql.Int, pressRelease)
       .input("Success_Stories", sql.Int, successStories)

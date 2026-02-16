@@ -27,7 +27,7 @@ router.get(
 
 router.post(
     "/district-daily-entry",
-    controller.insertDistrictDailyEntry
+    controller.insertDepartmentDailyEntry
   );
 
 router.get("/daily-entry/:entryId", GetDetail.getDepartmentDailyEntryById);

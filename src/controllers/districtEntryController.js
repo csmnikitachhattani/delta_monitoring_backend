@@ -1,6 +1,6 @@
 const { sql, poolPromise } = require("../config/db");
 
-exports.insertDistrictDailyEntry = async (req, res) => {
+exports.insertDepartmentDailyEntry = async (req, res) => {
   try {
     const {
       emailAddress,
@@ -42,8 +42,10 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       .input("Form_Timestamp", sql.DateTime, new Date())
       .input("Created_Date", sql.DateTime, new Date())
       .input("Last_Modified_Date", sql.DateTime, null)
-      .input("District_Name", sql.NVarChar(255), districtName)
+      //.input("District_Name", sql.NVarChar(255), districtName)
       .input("Entry_Date", sql.Date, entryDate)
+      .input("Dept_Id",  deptId)
+      .input("Department_Name", departmentName)
 
       // Counts
       .input("Press_Releases", sql.Int, pressReleases || 0)
