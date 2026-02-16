@@ -85,3 +85,71 @@ exports.getDistrictEntryById = async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   };
+
+
+exports.updateDistrictEntry = async (req, res) => {
+  const { entry_id } = req.params;
+  const data = req.body;
+
+  // ✅ Validate entry_id
+  const entryId = parseInt(entry_id, 10);
+  if (!entryId) {
+    return res.status(400).json({
+      success: false,
+      message: "Valid entry_id is required",
+    });
+  }
+  console.log(data)
+  try {
+    const pool = await poolPromise;
+    const request = pool.request();
+
+    // ✅ Required param
+    request.input("Entry_Id", sql.Int, entryId);
+
+    // ✅ Optional params (match SP params)
+    request.input("Email_Address", sql.NVarChar(255), data.Email_Address ?? null);
+    request.input("District_name", sql.NVarChar(255), data.District_name ?? null);
+    request.input("Date", sql.Date, data.Date ?? null);
+
+    request.input("Press_Releases", sql.Int, data.Press_Releases ?? null);
+    request.input("Success_Stories", sql.Int, data.Success_Stories ?? null);
+    request.input("Stories_Published_Nationally", sql.Int, data.Stories_Published_Nationally ?? null);
+    request.input("Stories_Published_on_State_Front_Page", sql.Int, data.Stories_Published_on_State_Front_Page ?? null);
+    request.input("Facebook_Posts", sql.Int, data.Facebook_Posts ?? null);
+    request.input("Twitter_X_Posts", sql.Int, data.Twitter_X_Posts ?? null);
+    request.input("ATR___Articles_Shared", sql.Int, data.ATR___Articles_Shared ?? null);
+    request.input("ATR___Action_Taken", sql.Int, data.ATR___Action_Taken ?? null);
+    request.input("Instagram_Posts", sql.Int, data.Instagram_Posts ?? null);
+
+    request.input("Edit_Response_Link", sql.NVarChar(sql.MAX), data.Edit_Response_Link ?? null);
+    request.input("District_id", sql.Int, data.District_id ?? null);
+    request.input("User_id", sql.Int, data.User_id ?? null);
+
+    // ✅ Execute SP
+    const result = await request.execute("dbo.UpdateDistrictEntry");
+
+    res.status(200).json({
+      success: true,
+      message: "Entry updated successfully",
+      data: result.recordset[0],
+    });
+
+  } catch (error) {
+    console.error("UpdateDistrictEntry Error:", error);
+
+    // ✅ Handle THROW from SQL
+    if (error.number === 50001) {
+      return res.status(404).json({
+        success: false,
+        message: error.message,
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
