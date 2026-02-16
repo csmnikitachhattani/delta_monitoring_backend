@@ -16,6 +16,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       Edit_Response_Link = null,
       District_id,
       user_id,
+      District_code
     } = req.body;
     console.log(req.body)
     // Basic validation
@@ -40,7 +41,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       .input("Twitter_X_Posts", sql.Int, twitterPosts)
       .input("Instagram_Posts", sql.Int, instagramPosts)
       .input("Edit_Response_Link", sql.NVarChar(500), Edit_Response_Link)
-      .input("District_id", sql.Int, District_id)
+      .input("District_id", sql.Int, District_code)
       .input("user_id", sql.NVarChar(50), user_id)
       .execute("sp_InsertDistrictDailyEntry");
 
@@ -59,3 +60,28 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     });
   }
 };
+
+exports.getDistrictEntryById = async (req, res) => {
+    const { entry_id } = req.params;
+  
+    if (!entry_id) {
+      return res.status(400).json({ error: "entry_id is required" });
+    }
+  
+    try {
+      const pool = await poolPromise;
+  
+      const result = await pool
+        .request()
+        .input("Entry_Id", sql.Int, entry_id)
+        .execute("dbo.GetDistrictEntryById");
+  
+      res.status(200).json({
+        success: true,
+        data: result.recordset[0] || null,
+      });
+    } catch (err) {
+      console.error("DB Error:", err);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  };

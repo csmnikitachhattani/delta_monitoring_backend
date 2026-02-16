@@ -9,13 +9,15 @@ const {
   getDepartmentDailyEntry,
   getDailyEntries,
 } = require("../controllers/entryListController");
-const {insertDistrictDailyEntry} = require('../controllers/districtController')
+const {insertDistrictDailyEntry, getDistrictEntryById} = require('../controllers/districtController')
 
 router.post("/userLogin", authController.userLogin);
 
 router.get("/department-daily-entry", getDepartmentDailyEntry);
 router.get("/get-entries", getDailyEntries);
 router.post("/district-entry", insertDistrictDailyEntry);
+router.get("/district-entry/:entry_id", getDistrictEntryById);
+
 
 router.get(
     "/departments/:proCode",
