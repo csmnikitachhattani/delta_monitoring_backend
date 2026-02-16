@@ -26,7 +26,6 @@ exports.getDepartmentDailyEntry = async (req, res) => {
 
 exports.getDailyEntries = async (req, res) => {
   const { user_id, type_id } = req.query;
-console.log(type_id)
   // ✅ Validation
   if (!user_id || !type_id) {
     return res.status(400).json({

@@ -42,10 +42,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       .input("Form_Timestamp", sql.DateTime, new Date())
       .input("Created_Date", sql.DateTime, new Date())
       .input("Last_Modified_Date", sql.DateTime, null)
-
-      // Department info
-      .input("Dept_Id", sql.NVarChar(50), deptId)
-      .input("Department_Name", sql.NVarChar(255), departmentName)
+      .input("District_Name", sql.NVarChar(255), districtName)
       .input("Entry_Date", sql.Date, entryDate)
 
       // Counts

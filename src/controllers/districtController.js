@@ -21,7 +21,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     } = req.body;
 
     // Basic validation
-    if (!Email_Address || !District_name || !Date || !District_id || !user_id) {
+    if ( !District_name || !user_id) {
       return res.status(400).json({
         success: false,
         message: "Required fields missing",
