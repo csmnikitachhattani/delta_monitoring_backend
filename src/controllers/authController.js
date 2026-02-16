@@ -24,8 +24,7 @@ exports.userLogin = async (req, res) => {
         loginusertypename: response.loginusertypename,
         userstatus: response.userstatus,
         district_name: response.district_name_text_en,
-
-        //token: token,
+        district_code : response.district_code,
         message: "Login successful",
         isfactcheckuser: response.isfactcheckuser,
       };
