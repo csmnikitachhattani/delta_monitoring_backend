@@ -3,6 +3,7 @@ const { sql, poolPromise } = require("../config/db");
 exports.getDepartmentDailyEntryById = async (req, res) => {
   try {
     const { entryId } = req.params;
+    console.log(entryId)
 
     if (!entryId) {
       return res.status(400).json({
