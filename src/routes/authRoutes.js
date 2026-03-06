@@ -26,14 +26,14 @@ router.get(
   );
 
 router.post(
-    "/district-daily-entry",
+    "/department-daily-entry",
     controller.insertDepartmentDailyEntry
   );
 
 router.get("/daily-entry/:entryId", GetDetail.getDepartmentDailyEntryById);
 
 router.put(
-  "/district-daily-entry/:entryId",
+  "/department-daily-entry/:entryId",
   UpdateDetail.updateDepartmentDailyEntry
 );
   

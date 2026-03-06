@@ -43,6 +43,7 @@ exports.insertDistrictDailyEntry = async (req, res) => {
       .input("Edit_Response_Link", sql.NVarChar(500), Edit_Response_Link)
       .input("District_id", sql.Int, District_code)
       .input("user_id", sql.NVarChar(50), user_id)
+      .input("District_name", sql.NVarChar(50), District_name)
       .execute("sp_InsertDistrictDailyEntry");
 
     res.status(200).json({
