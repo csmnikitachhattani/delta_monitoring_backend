@@ -9,7 +9,7 @@ const {
   getDepartmentDailyEntry,
   getDailyEntries,
 } = require("../controllers/entryListController");
-const {insertDistrictDailyEntry, getDistrictEntryById, updateDistrictEntry} = require('../controllers/districtController')
+const {insertDistrictDailyEntry, getDistrictEntryById, updateDistrictEntry, deleteDistrictEntry} = require('../controllers/districtController')
 
 router.post("/userLogin", authController.userLogin);
 
@@ -20,6 +20,7 @@ router.get("/get-entries", getDailyEntries);
 router.post("/district-entry", insertDistrictDailyEntry);
 router.get("/district-entry/:entry_id", getDistrictEntryById);
 router.put("/district-entry-update/:entry_id", updateDistrictEntry);
+router.delete("/district-delete-entry/:entry_id", deleteDistrictEntry);
 
 
 router.get(
@@ -40,6 +41,7 @@ router.put(
   "/department-daily-entry/:entryId",
   UpdateDetail.updateDepartmentDailyEntry
 );
+
   
 
 module.exports = router;

@@ -11,7 +11,7 @@ exports.userLogin = async (req, res) => {
     user.usrpassword = md5(pwd);
   
     const response = await loginRepository.usrLogin(user);
-
+    console.log(response)
     if (response) {
      // const token = generateJwtToken(response);
 

@@ -152,3 +152,29 @@ exports.updateDistrictEntry = async (req, res) => {
   }
 };
 
+exports.deleteDistrictEntry = async (req, res) => {
+  try {
+    const { entry_id } = req.params;
+
+    const pool = await sql.connect(dbConfig);
+
+    await pool
+      .request()
+      .input("entry_id", sql.Int, entry_id)
+      .execute("delete_district_entry");
+
+    res.status(200).json({
+      success: true,
+      message: "Entry deleted successfully"
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Error deleting entry",
+      error: error.message
+    });
+  }
+};
+
