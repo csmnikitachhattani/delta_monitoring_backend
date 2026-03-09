@@ -14,6 +14,8 @@ const {insertDistrictDailyEntry, getDistrictEntryById, updateDistrictEntry} = re
 router.post("/userLogin", authController.userLogin);
 
 router.get("/department-daily-entry", getDepartmentDailyEntry);
+
+// get daily on condition basis department or District
 router.get("/get-entries", getDailyEntries);
 router.post("/district-entry", insertDistrictDailyEntry);
 router.get("/district-entry/:entry_id", getDistrictEntryById);
@@ -29,6 +31,8 @@ router.post(
     "/department-daily-entry",
     controller.insertDepartmentDailyEntry
   );
+
+router.delete("/department-entry/:entryId", controller.softDeleteEntry);
 
 router.get("/daily-entry/:entryId", GetDetail.getDepartmentDailyEntryById);
 

@@ -20,13 +20,13 @@ exports.insertDepartmentDailyEntry = async (req, res) => {
       user_id
     } = req.body;
 
-    // 🔒 Basic validation
-    // if (!entryDate || !deptId || !departmentName) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Dept Id, Department Name and Entry Date are required",
-    //   });
-    // }
+   // 🔒 Basic validation
+    if (!deptId ) {
+      return res.status(400).json({
+        success: false,
+        message: "Dept Id, Department Name and Entry Date are required",
+      });
+    }
     if (!user_id) {
       return res.status(400).json({
         success: false,
@@ -94,6 +94,46 @@ exports.insertDepartmentDailyEntry = async (req, res) => {
       success: false,
       message: "Failed to insert department daily entry",
       error: error.message,
+    });
+  }
+};
+
+exports.softDeleteEntry = async (req, res) => {
+  try {
+    const { entryId } = req.params;
+
+    if (!entryId || isNaN(entryId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid Entry Id is required"
+      });
+    }
+
+    const pool = await poolPromise;
+
+    const result = await pool
+      .request()
+      .input("Entry_Id", sql.Int, entryId)
+      .execute("usp_SoftDelete_Department_Daily_Entry");
+
+    return res.status(200).json({
+      success: true,
+      message: result.recordset[0]?.Message || "Deleted Successfully"
+    });
+
+  } catch (error) {
+    console.error("SoftDelete Error:", error);
+
+    if (error.number === 50000) {
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error"
     });
   }
 };
