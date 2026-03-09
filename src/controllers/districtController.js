@@ -156,12 +156,14 @@ exports.deleteDistrictEntry = async (req, res) => {
   try {
     const { entry_id } = req.params;
 
-    const pool = await sql.connect(dbConfig);
+    //const pool = await sql.connect(dbConfig);
+    const pool = await poolPromise;
+    //const request = pool.request();
 
     await pool
       .request()
       .input("entry_id", sql.Int, entry_id)
-      .execute("delete_district_entry");
+      .execute("usp_SoftDelete_District_Daily_Entry");
 
     res.status(200).json({
       success: true,
