@@ -6,7 +6,7 @@ exports.insertDepartmentDailyEntry = async (req, res) => {
       emailAddress,
       deptId,
       departmentName,
-      entryDate,
+      Entry_Date,
       pressReleases,
       successStories,
       storiesPublishedNationally,
@@ -43,7 +43,7 @@ exports.insertDepartmentDailyEntry = async (req, res) => {
       .input("Created_Date", sql.DateTime, new Date())
       .input("Last_Modified_Date", sql.DateTime, null)
       //.input("District_Name", sql.NVarChar(255), districtName)
-      .input("Entry_Date", sql.Date, entryDate)
+      .input("Entry_Date", sql.Date, Entry_Date)
       .input("Dept_Id",  deptId)
       .input("Department_Name", departmentName)
 
