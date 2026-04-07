@@ -5,19 +5,20 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     const {
       Email_Address,
       District_name,
-      entryDate,
+      Entry_Date,
       Press_Releases,
       Success_Stories,
-      National_Stories,
-      State_Front_Post,
-      Facebook_Posts,
-      Twitter_X_Posts,
+      nationalStories,
+      stateFrontPost,
+      facebookPosts,
+      twitterPosts,
       instagramPosts,
       Edit_Response_Link = null,
       District_id,
       user_id,
       District_code
     } = req.body;
+    data = res.body
     console.log(req.body)
     // Basic validation
     if ( !District_name || !user_id) {
@@ -30,22 +31,20 @@ exports.insertDistrictDailyEntry = async (req, res) => {
     const pool = await poolPromise;
 
     await pool.request()
-    .input("Email_Address", sql.NVarChar(255), Email_Address)     
-     //.input("District_name", sql.NVarChar(150), District_name)
+      .input("Email_Address", sql.NVarChar(255), Email_Address)     
+      .input("District_name", sql.NVarChar(150), District_name)
       .input("Date", sql.Date, Entry_Date)
       .input("Press_Releases", sql.Int, Press_Releases)
       .input("Success_Stories", sql.Int,  Success_Stories)
-      .input("Stories_Published_Nationally", sql.Int, National_Stories)
-      .input("Stories_Published_on_State_Front_Page", sql.Int,  State_Front_Post)
-      .input("Facebook_Posts", sql.Int, Facebook_Posts)
-      .input("Twitter_X_Posts", sql.Int,  Twitter_X_Posts)
+      .input("Stories_Published_Nationally", sql.Int, nationalStories)
+      .input("Stories_Published_on_State_Front_Page", sql.Int,  stateFrontPost)
+      .input("Facebook_Posts", sql.Int, facebookPosts)
+      .input("Twitter_X_Posts", sql.Int,  twitterPosts)
       .input("Instagram_Posts", sql.Int, instagramPosts)
-      .input("Edit_Response_Link", sql.NVarChar(500), Edit_Response_Link)
       .input("District_id", sql.Int, District_code)
       .input("user_id", sql.NVarChar(50), user_id)
-      .input("District_name", sql.NVarChar(50), District_name)
       .execute("sp_InsertDistrictDailyEntry");
-
+     
     res.status(200).json({
       success: true,
       message: "Entry inserted successfully",
@@ -99,7 +98,7 @@ exports.updateDistrictEntry = async (req, res) => {
       message: "Valid entry_id is required",
     });
   }
-  console.log(data)
+  //console.log(data)
   try {
     const pool = await poolPromise;
     const request = pool.request();
