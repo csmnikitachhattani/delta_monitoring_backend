@@ -7,6 +7,7 @@ exports.userLogin = async (req, res) => {
     const user = req.body;
 
     // Encrypt password (MD5 like C#)
+  
     const pwd = user.usrpassword;
     user.usrpassword = md5(pwd);
   

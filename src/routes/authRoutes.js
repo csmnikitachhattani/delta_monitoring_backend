@@ -14,7 +14,6 @@ const {insertDistrictDailyEntry, getDistrictEntryById, updateDistrictEntry, dele
 router.post("/userLogin", authController.userLogin);
 
 router.get("/department-daily-entry", getDepartmentDailyEntry);
-
 // get daily on condition basis department or District
 router.get("/get-entries", getDailyEntries);
 router.post("/district-entry", insertDistrictDailyEntry);
